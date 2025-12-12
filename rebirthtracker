@@ -65,9 +65,22 @@ if sell then
 end
 
 local existingTracker = StatsFrame:FindFirstChild("RebirthTracker")
-if existingTracker then
-    existingTracker:Destroy()
-end
+if existingTracker then existingTracker:Destroy() end
+
+local existing1min = StatsFrame:FindFirstChild("1min")
+if existing1min then existing1min:Destroy() end
+
+local existing5min = StatsFrame:FindFirstChild("5min")
+if existing5min then existing5min:Destroy() end
+
+local existingStart = StatsFrame:FindFirstChild("Start")
+if existingStart then existingStart:Destroy() end
+
+local existingCustom = StatsFrame:FindFirstChild("Custom")
+if existingCustom then existingCustom:Destroy() end
+
+local existingSet = StatsFrame:FindFirstChild("Set")
+if existingSet then existingSet:Destroy() end
 
 local tokensGui = StatsFrame:FindFirstChild("Tokens")
 if not tokensGui then
@@ -102,21 +115,6 @@ if DisplayAmount then
     DisplayAmount.Text = ":3"
 end
 
-local existing1min = StatsFrame:FindFirstChild("1min")
-if existing1min then existing1min:Destroy() end
-
-local existing5min = StatsFrame:FindFirstChild("5min")
-if existing5min then existing5min:Destroy() end
-
-local existingStart = StatsFrame:FindFirstChild("Start")
-if existingStart then existingStart:Destroy() end
-
-local existingCustom = StatsFrame:FindFirstChild("Custom")
-if existingCustom then existingCustom:Destroy() end
-
-local existingSet = StatsFrame:FindFirstChild("Set")
-if existingSet then existingSet:Destroy() end
-
 local _1min = Instance.new("ImageLabel")
 _1min.Name = "1min"
 _1min.Parent = StatsFrame
@@ -132,14 +130,14 @@ _1min.ScaleType = Enum.ScaleType.Slice
 _1min.SliceCenter = Rect.new(9, 11, 91, 89)
 
 local minutebutton = Instance.new("TextButton")
+minutebutton.Name = "MinuteButton"
 minutebutton.Parent = _1min
 minutebutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 minutebutton.BackgroundTransparency = 1.000
-minutebutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 minutebutton.BorderSizePixel = 0
-minutebutton.Position = UDim2.new(-0.101070119, 0, -0.10972467009, 0)
-minutebutton.Size = UDim2.new(0, 45, 0, 23)
-minutebutton.ZIndex = 2
+minutebutton.Position = UDim2.new(0, 0, 0, 0)
+minutebutton.Size = UDim2.new(1, 0, 1, 0)
+minutebutton.ZIndex = 3
 minutebutton.Font = Enum.Font.Arial
 minutebutton.Text = "1 Min"
 minutebutton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -164,14 +162,14 @@ _5min.ScaleType = Enum.ScaleType.Slice
 _5min.SliceCenter = Rect.new(9, 11, 91, 89)
 
 local fiveminutebutton = Instance.new("TextButton")
+fiveminutebutton.Name = "FiveMinuteButton"
 fiveminutebutton.Parent = _5min
 fiveminutebutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 fiveminutebutton.BackgroundTransparency = 1.000
-fiveminutebutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 fiveminutebutton.BorderSizePixel = 0
-fiveminutebutton.Position = UDim2.new(-0.0736476034, 0, -0.10972467009, 0)
-fiveminutebutton.Size = UDim2.new(0, 45, 0, 23)
-fiveminutebutton.ZIndex = 2
+fiveminutebutton.Position = UDim2.new(0, 0, 0, 0)
+fiveminutebutton.Size = UDim2.new(1, 0, 1, 0)
+fiveminutebutton.ZIndex = 3
 fiveminutebutton.Font = Enum.Font.Arial
 fiveminutebutton.Text = "5 Min"
 fiveminutebutton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -196,14 +194,14 @@ Start.ScaleType = Enum.ScaleType.Slice
 Start.SliceCenter = Rect.new(9, 11, 91, 89)
 
 local StartButton = Instance.new("TextButton")
+StartButton.Name = "StartButton"
 StartButton.Parent = Start
 StartButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 StartButton.BackgroundTransparency = 1.000
-StartButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 StartButton.BorderSizePixel = 0
-StartButton.Position = UDim2.new(-0.0736476034, 0, -0.109724671, 0)
-StartButton.Size = UDim2.new(0, 80, 0, 24)
-StartButton.ZIndex = 2
+StartButton.Position = UDim2.new(0, 0, 0, 0)
+StartButton.Size = UDim2.new(1, 0, 1, 0)
+StartButton.ZIndex = 3
 StartButton.Font = Enum.Font.Arial
 StartButton.Text = "Start"
 StartButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -213,13 +211,14 @@ StartButton.TextWrapped = true
 StartButton.TextStrokeTransparency = 0.5
 
 local ResultLabel = Instance.new("TextLabel")
+ResultLabel.Name = "ResultLabel"
 ResultLabel.Parent = Start
 ResultLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ResultLabel.BackgroundTransparency = 1.000
-ResultLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ResultLabel.BorderSizePixel = 0
 ResultLabel.Position = UDim2.new(-0.188091815, 0, -2, 0)
 ResultLabel.Size = UDim2.new(1.10000002, 7, 0, 38)
+ResultLabel.ZIndex = 2
 ResultLabel.Font = Enum.Font.Arial
 ResultLabel.Text = ""
 ResultLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -243,21 +242,23 @@ Custom.ScaleType = Enum.ScaleType.Slice
 Custom.SliceCenter = Rect.new(9, 11, 91, 89)
 
 local TextBox = Instance.new("TextBox")
+TextBox.Name = "TimeInput"
 TextBox.Parent = Custom
 TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.BackgroundTransparency = 1.000
-TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox.BorderSizePixel = 0
-TextBox.Position = UDim2.new(-0.0177852996, 0, -0.0100767724, 0)
-TextBox.Size = UDim2.new(0, 74, 0, 19)
-TextBox.ZIndex = 2
+TextBox.Position = UDim2.new(0.05, 0, 0.1, 0)
+TextBox.Size = UDim2.new(0.9, 0, 0.8, 0)
+TextBox.ZIndex = 3
 TextBox.Font = Enum.Font.Arial
-TextBox.Text = "Enter Time (In Sec)"
+TextBox.Text = "Time (Sec)"
+TextBox.PlaceholderText = "Time (Sec)"
 TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.TextScaled = true
 TextBox.TextSize = 14.000
 TextBox.TextStrokeTransparency = 0.500
 TextBox.TextWrapped = true
+TextBox.ClearTextOnFocus = true
 
 local Set = Instance.new("ImageLabel")
 Set.Name = "Set"
@@ -274,14 +275,14 @@ Set.ScaleType = Enum.ScaleType.Slice
 Set.SliceCenter = Rect.new(9, 11, 91, 89)
 
 local setbutton = Instance.new("TextButton")
+setbutton.Name = "SetButton"
 setbutton.Parent = Set
 setbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 setbutton.BackgroundTransparency = 1.000
-setbutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 setbutton.BorderSizePixel = 0
-setbutton.Position = UDim2.new(-0.0135654537, 0, -0.10025271, 0)
-setbutton.Size = UDim2.new(0, 45, 0, 23)
-setbutton.ZIndex = 2
+setbutton.Position = UDim2.new(0, 0, 0, 0)
+setbutton.Size = UDim2.new(1, 0, 1, 0)
+setbutton.ZIndex = 3
 setbutton.Font = Enum.Font.Arial
 setbutton.Text = "Set"
 setbutton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -333,7 +334,7 @@ local function ResetState()
     end
     
     if TextBox and TextBox.Parent then
-        TextBox.Text = "Enter Time (In Sec)"
+        TextBox.Text = "Time (Sec)"
     end
 end
 
@@ -511,4 +512,4 @@ StartButton.MouseButton1Click:Connect(function()
     task.spawn(StartTracking)
 end)
 
-print("Rebirth Tracker Load
+print("Rebirth Tracker Loaded")
