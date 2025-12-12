@@ -64,6 +64,11 @@ if sell then
     sell.Position = UDim2.new(-10, 0, -10, 0)
 end
 
+local existingTracker = StatsFrame:FindFirstChild("RebirthTracker")
+if existingTracker then
+    existingTracker:Destroy()
+end
+
 local tokensGui = StatsFrame:FindFirstChild("Tokens")
 if not tokensGui then
     warn("Tokens GUI not found")
@@ -96,6 +101,21 @@ if DisplayAmount then
     end
     DisplayAmount.Text = ":3"
 end
+
+local existing1min = StatsFrame:FindFirstChild("1min")
+if existing1min then existing1min:Destroy() end
+
+local existing5min = StatsFrame:FindFirstChild("5min")
+if existing5min then existing5min:Destroy() end
+
+local existingStart = StatsFrame:FindFirstChild("Start")
+if existingStart then existingStart:Destroy() end
+
+local existingCustom = StatsFrame:FindFirstChild("Custom")
+if existingCustom then existingCustom:Destroy() end
+
+local existingSet = StatsFrame:FindFirstChild("Set")
+if existingSet then existingSet:Destroy() end
 
 local _1min = Instance.new("ImageLabel")
 _1min.Name = "1min"
@@ -192,21 +212,21 @@ StartButton.TextSize = 14.000
 StartButton.TextWrapped = true
 StartButton.TextStrokeTransparency = 0.5
 
-local TextLabel = Instance.new("TextLabel")
-TextLabel.Parent = Start
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(-0.188091815, 0, -2, 0)
-TextLabel.Size = UDim2.new(1.10000002, 7, 0, 38)
-TextLabel.Font = Enum.Font.Arial
-TextLabel.Text = ""
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-TextLabel.TextStrokeTransparency = 0.500
-TextLabel.TextWrapped = true
+local ResultLabel = Instance.new("TextLabel")
+ResultLabel.Parent = Start
+ResultLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ResultLabel.BackgroundTransparency = 1.000
+ResultLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ResultLabel.BorderSizePixel = 0
+ResultLabel.Position = UDim2.new(-0.188091815, 0, -2, 0)
+ResultLabel.Size = UDim2.new(1.10000002, 7, 0, 38)
+ResultLabel.Font = Enum.Font.Arial
+ResultLabel.Text = ""
+ResultLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ResultLabel.TextScaled = true
+ResultLabel.TextSize = 14.000
+ResultLabel.TextStrokeTransparency = 0.500
+ResultLabel.TextWrapped = true
 
 local Custom = Instance.new("ImageLabel")
 Custom.Name = "Custom"
@@ -278,8 +298,8 @@ local function SetDisplayText(text)
 end
 
 local function SetResultText(text)
-    if TextLabel and TextLabel.Parent then
-        TextLabel.Text = text
+    if ResultLabel and ResultLabel.Parent then
+        ResultLabel.Text = text
     end
 end
 
@@ -491,4 +511,4 @@ StartButton.MouseButton1Click:Connect(function()
     task.spawn(StartTracking)
 end)
 
-print("Rebirth Tracker Loaded")
+print("Rebirth Tracker Load
